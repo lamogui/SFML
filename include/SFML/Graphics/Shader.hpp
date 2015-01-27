@@ -223,6 +223,49 @@ public:
     /// \brief Change a float parameter of the shader
     ///
     /// \a name is the name of the variable to change in the shader.
+    /// The corresponding parameter in the shader must be a bool
+    /// (bool GLSL type).
+    ///
+    /// Example:
+    /// \code
+    /// uniform bool myparam; // this is the variable in the shader
+    /// \endcode
+    /// \code
+    /// shader.setParameter("myparam", true);
+    /// \endcode
+    ///
+    /// \param name Name of the parameter in the shader
+    /// \param x    Value to assign
+    ///
+    ////////////////////////////////////////////////////////////
+    void setParameter(const std::string& name, bool x);
+    
+    ////////////////////////////////////////////////////////////
+    /// \brief Change a float parameter of the shader
+    ///
+    /// \a name is the name of the variable to change in the shader.
+    /// The corresponding parameter in the shader must be a int
+    /// (int GLSL type).
+    ///
+    /// Example:
+    /// \code
+    /// uniform int myparam; // this is the variable in the shader
+    /// \endcode
+    /// \code
+    /// shader.setParameter("myparam", 22);
+    /// \endcode
+    ///
+    /// \param name Name of the parameter in the shader
+    /// \param x    Value to assign
+    ///
+    ////////////////////////////////////////////////////////////
+    void setParameter(const std::string& name, int x);
+    
+    
+    ////////////////////////////////////////////////////////////
+    /// \brief Change a float parameter of the shader
+    ///
+    /// \a name is the name of the variable to change in the shader.
     /// The corresponding parameter in the shader must be a float
     /// (float GLSL type).
     ///

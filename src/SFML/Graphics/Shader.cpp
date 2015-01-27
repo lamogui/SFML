@@ -280,6 +280,54 @@ void Shader::setParameter(const std::string& name, float x)
 
 
 ////////////////////////////////////////////////////////////
+void Shader::setParameter(const std::string& name, bool x)
+{
+    if (m_shaderProgram)
+    {
+        ensureGlContext();
+
+        // Enable program
+        GLhandleARB program = glCheck(glGetHandleARB(GL_PROGRAM_OBJECT_ARB));
+        glCheck(glUseProgramObjectARB(m_shaderProgram));
+
+        // Get parameter location and assign it new values
+        GLint location = getParamLocation(name);
+        if (location != -1)
+        {
+            glCheck(glUniform1iARB(location, x));
+        }
+
+        // Disable program
+        glCheck(glUseProgramObjectARB(program));
+    }
+}
+
+
+////////////////////////////////////////////////////////////
+void Shader::setParameter(const std::string& name, int x)
+{
+    if (m_shaderProgram)
+    {
+        ensureGlContext();
+
+        // Enable program
+        GLhandleARB program = glCheck(glGetHandleARB(GL_PROGRAM_OBJECT_ARB));
+        glCheck(glUseProgramObjectARB(m_shaderProgram));
+
+        // Get parameter location and assign it new values
+        GLint location = getParamLocation(name);
+        if (location != -1)
+        {
+            glCheck(glUniform1iARB(location, x));
+        }
+
+        // Disable program
+        glCheck(glUseProgramObjectARB(program));
+    }
+}
+
+
+////////////////////////////////////////////////////////////
 void Shader::setParameter(const std::string& name, float x, float y)
 {
     if (m_shaderProgram)
