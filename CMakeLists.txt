@@ -12,6 +12,8 @@ endmacro()
 # this has to be done before the project() instruction!
 sfml_set_option(CMAKE_BUILD_TYPE Release STRING "Choose the type of build (Debug or Release)")
 
+sfml_set_option(LIB_INSTALL_DIR lib STRING "The lib destination dir (lib, lib32 or lib64)")
+
 # project name
 project(SFML)
 
@@ -245,6 +247,8 @@ if(NOT SFML_OS_ANDROID)
     install(FILES cmake/Modules/FindSFML.cmake DESTINATION ${INSTALL_MISC_DIR}/cmake/Modules)
 endif()
 
+
+
 # install 3rd-party libraries and tools
 if(SFML_OS_WINDOWS)
 
@@ -252,16 +256,16 @@ if(SFML_OS_WINDOWS)
     if(ARCH_32BITS)
         install(DIRECTORY extlibs/bin/x86/ DESTINATION bin)
         if(SFML_COMPILER_MSVC)
-            install(DIRECTORY extlibs/libs-msvc/x86/ DESTINATION lib)
+            install(DIRECTORY extlibs/libs-msvc/x86/ DESTINATION ${LIB_INSTALL_DIR})
         else()
-            install(DIRECTORY extlibs/libs-mingw/x86/ DESTINATION lib)
+            install(DIRECTORY extlibs/libs-mingw/x86/ DESTINATION ${LIB_INSTALL_DIR})
         endif()
     elseif(ARCH_64BITS)
         install(DIRECTORY extlibs/bin/x64/ DESTINATION bin)
         if(SFML_COMPILER_MSVC)
-            install(DIRECTORY extlibs/libs-msvc/x64/ DESTINATION lib)
+            install(DIRECTORY extlibs/libs-msvc/x64/ DESTINATION ${LIB_INSTALL_DIR})
         else()
-            install(DIRECTORY extlibs/libs-mingw/x64/ DESTINATION lib)
+            install(DIRECTORY extlibs/libs-mingw/x64/ DESTINATION ${LIB_INSTALL_DIR})
         endif()
     endif()
 
@@ -291,17 +295,17 @@ elseif(SFML_OS_IOS)
 
     # fix CMake install rules broken for iOS (see http://public.kitware.com/Bug/view.php?id=12506)
     if(SFML_OS_IOS)
-        install(DIRECTORY "${CMAKE_BINARY_DIR}/lib/\$ENV{CONFIGURATION}/" DESTINATION lib${LIB_SUFFIX})
+        install(DIRECTORY "${CMAKE_BINARY_DIR}/${LIB_INSTALL_DIR}/\$ENV{CONFIGURATION}/" DESTINATION ${LIB_INSTALL_DIR}${LIB_SUFFIX})
     endif()
 
     # since the iOS libraries are built as static, we must install the SFML dependencies
     # too so that the end user can easily link them to its final application
-    install(FILES extlibs/libs-ios/libfreetype.a extlibs/libs-ios/libjpeg.a DESTINATION lib)
+    install(FILES extlibs/libs-ios/libfreetype.a extlibs/libs-ios/libjpeg.a DESTINATION ${LIB_INSTALL_DIR})
 
 elseif(SFML_OS_ANDROID)
 
     # install extlibs
-    install(DIRECTORY extlibs/libs-android/${ANDROID_ABI} DESTINATION extlibs/lib)
+    install(DIRECTORY extlibs/libs-android/${ANDROID_ABI} DESTINATION extlibs/${LIB_INSTALL_DIR})
     install(FILES extlibs/Android.mk DESTINATION extlibs)
 
     # install Android.mk so the NDK knows how to set up SFML
