@@ -672,7 +672,7 @@ void Shader::bindTextures() const
         GLint index = static_cast<GLsizei>(i + 1);
         glCheck(GLEXT_glUniform1i(it->first, index));
         glCheck(GLEXT_glActiveTexture(GLEXT_GL_TEXTURE0 + index));
-        Texture::bind(it->second);
+        it->second->bind();
         ++it;
     }
 
