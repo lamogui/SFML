@@ -25,7 +25,7 @@
 ////////////////////////////////////////////////////////////
 // Headers
 ////////////////////////////////////////////////////////////
-#include <SFML/Graphics/GlTexture.hpp>
+#include <SFML/Graphics/GLTexture.hpp>
 #include <SFML/Graphics/GLCheck.hpp>
 #include <SFML/Window/Context.hpp>
 #include <SFML/System/Mutex.hpp>
@@ -90,6 +90,7 @@ unsigned int GlTexture::getMaximumSize()
 ////////////////////////////////////////////////////////////
 unsigned int GlTexture::getValidSize(unsigned int size)
 {
+    
     ensureGlContext();
 
     // Make sure that extensions are initialized

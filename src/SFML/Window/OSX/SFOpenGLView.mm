@@ -1,8 +1,8 @@
 ////////////////////////////////////////////////////////////
 //
 // SFML - Simple and Fast Multimedia Library
-// Copyright (C) 2007-2014 Marco Antognini (antognini.marco@gmail.com),
-//                         Laurent Gomila (laurent.gom@gmail.com),
+// Copyright (C) 2007-2015 Marco Antognini (antognini.marco@gmail.com),
+//                         Laurent Gomila (laurent@sfml-dev.org)
 //
 // This software is provided 'as-is', without any express or implied warranty.
 // In no event will the authors be held liable for any damages arising from the use of this software.
@@ -474,7 +474,7 @@ BOOL isValidTextUnicode(NSEvent* event);
     if (m_requester != 0)
     {
         NSPoint loc = [self cursorPositionFromEvent:theEvent];
-        m_requester->mouseWheelScrolledAt([theEvent deltaY], loc.x, loc.y);
+        m_requester->mouseWheelScrolledAt([theEvent deltaX], [theEvent deltaY], loc.x, loc.y);
     }
 
     // Transmit to non-SFML responder

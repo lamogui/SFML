@@ -1,7 +1,7 @@
 ////////////////////////////////////////////////////////////
 //
 // SFML - Simple and Fast Multimedia Library
-// Copyright (C) 2007-2014 Laurent Gomila (laurent.gom@gmail.com)
+// Copyright (C) 2007-2015 Laurent Gomila (laurent@sfml-dev.org)
 //
 // This software is provided 'as-is', without any express or implied warranty.
 // In no event will the authors be held liable for any damages arising from the use of this software.
@@ -82,6 +82,16 @@ public:
     ~WglContext();
 
     ////////////////////////////////////////////////////////////
+    /// \brief Get the address of an OpenGL function
+    ///
+    /// \param name Name of the function to get the address of
+    ///
+    /// \return Address of the OpenGL function, 0 on failure
+    ///
+    ////////////////////////////////////////////////////////////
+    static GlFunctionPointer getFunction(const char* name);
+
+    ////////////////////////////////////////////////////////////
     /// \brief Activate the context as the current target for rendering
     ///
     /// \return True on success, false if any error happened
@@ -107,6 +117,18 @@ public:
     ///
     ////////////////////////////////////////////////////////////
     virtual void setVerticalSyncEnabled(bool enabled);
+
+    ////////////////////////////////////////////////////////////
+    /// \brief Select the best pixel format for a given set of settings
+    ///
+    /// \param deviceContext Device context
+    /// \param bitsPerPixel  Pixel depth, in bits per pixel
+    /// \param settings      Requested context settings
+    ///
+    /// \return The best pixel format
+    ///
+    ////////////////////////////////////////////////////////////
+    static int selectBestPixelFormat(HDC deviceContext, unsigned int bitsPerPixel, const ContextSettings& settings);
 
 private:
 
